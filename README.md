@@ -11,8 +11,8 @@ Plateforme d'entraînement pour le partiel de Labo Math-Info (Mandelbrot, Polyn�
 ## Installation
 
 ```bash
-git clone <url-du-dépôt> labomi
-cd labomi
+git clone https://github.com/UnOrdinary95/RevisionPartielLaboMI.git
+cd RevisionPartielLaboMI
 ```
 
 **Linux / macOS**

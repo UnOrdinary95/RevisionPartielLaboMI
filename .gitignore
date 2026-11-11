@@ -1,0 +1,45 @@
+# ───── Fichiers sensibles / privés ─────
+# Sujets du prof, annales et rendus de TP (non redistribuables)
+docs/
+*.pdf
+*.ipynb
+.ipynb_checkpoints/
+
+# Progression exportée depuis l'onglet Historique (données perso)
+labomi-progression-*.json
+
+# Variables d'environnement, clés, secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Config locale de Claude Code
+.claude/
+
+# ───── Dépendances et build ─────
+node_modules/
+dist/
+dist-ssr/
+*.local
+*.tsbuildinfo
+
+# ───── Logs ─────
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# ───── Python ─────
+__pycache__/
+*.pyc
+
+# ───── Éditeurs / OS ─────
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+*.suo
+*.sw?

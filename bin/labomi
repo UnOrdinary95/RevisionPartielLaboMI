@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# Lance la plateforme de révision Labo MI et l'ouvre dans le navigateur.
+set -e
+
+# Dossier du projet = parent de ce script, en suivant les liens symboliques.
+# (pas de « readlink -f » : absent sur les anciens macOS)
+SELF="${BASH_SOURCE[0]}"
+while [ -L "$SELF" ]; do
+  LINK="$(readlink "$SELF")"
+  case "$LINK" in
+    /*) SELF="$LINK" ;;
+    *) SELF="$(dirname "$SELF")/$LINK" ;;
+  esac
+done
+DIR="$(cd "$(dirname "$SELF")/.." && pwd)"
+PORT="${LABOMI_PORT:-5173}"
+URL="http://localhost:$PORT"
+
+open_url() {
+  if command -v xdg-open >/dev/null; then xdg-open "$1" >/dev/null 2>&1 &
+  elif command -v open >/dev/null; then open "$1"
+  else echo "Ouvre $1 dans ton navigateur"; fi
+}
+
+# Déjà lancé ? On ouvre juste le navigateur.
+if curl -s "$URL" 2>/dev/null | grep -q "Labo MI"; then
+  echo "Labo MI tourne déjà sur $URL"
+  open_url "$URL"
+  exit 0
+fi
+
+if ! command -v pnpm >/dev/null; then
+  echo "pnpm est introuvable. Installe-le : npm install -g pnpm" >&2
+  exit 1
+fi
+
+cd "$DIR"
+[ -d node_modules ] || pnpm install
+exec pnpm dev --port "$PORT" --strictPort --open

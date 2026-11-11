@@ -16,7 +16,7 @@ fi
 chmod +x "$DIR/bin/labomi"
 mkdir -p "$BIN"
 ln -sfn "$DIR/bin/labomi" "$BIN/labomi"
-(cd "$DIR" && pnpm install)
+(cd "$DIR" && { pnpm install --frozen-lockfile || pnpm install; })
 
 echo
 echo "✓ Commande installée : $BIN/labomi"

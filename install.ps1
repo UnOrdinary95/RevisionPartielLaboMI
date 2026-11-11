@@ -13,7 +13,8 @@ if (-not (Get-Command pnpm -ErrorAction SilentlyContinue)) {
 }
 
 Push-Location $Dir
-pnpm install
+pnpm install --frozen-lockfile
+if ($LASTEXITCODE -ne 0) { pnpm install }
 Pop-Location
 
 # Petit lanceur labomi.cmd dans %LOCALAPPDATA%\labomi\bin

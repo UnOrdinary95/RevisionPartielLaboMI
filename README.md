@@ -39,6 +39,16 @@ Le site s'ouvre dans le navigateur sur http://localhost:5173. `Ctrl+C` pour l'ar
 
 Sans la commande, depuis le dossier du projet : `pnpm dev`.
 
+## Mises à jour
+
+`labomi` vérifie s'il y a une nouvelle version sur GitHub à chaque lancement et l'installe automatiquement (dépendances comprises). Si tu es hors ligne ou si tu as modifié des fichiers du projet, il lance la version actuelle sans rien toucher.
+
+```bash
+labomi update       # mettre à jour sans lancer
+labomi --no-update  # lancer sans vérifier
+labomi help         # aide
+```
+
 ## Désinstaller
 
 **Linux / macOS**

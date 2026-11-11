@@ -13,10 +13,22 @@ if ! command -v pnpm >/dev/null; then
   exit 1
 fi
 
+# Ne jamais écraser une autre commande « labomi » qui n'est pas la nôtre
+if [ -e "$BIN/labomi" ] || [ -L "$BIN/labomi" ]; then
+  # c'est « le nôtre » si c'est un lien vers un lanceur Labo MI (ou un lien cassé d'une ancienne install)
+  if [ ! -L "$BIN/labomi" ] || { [ -e "$BIN/labomi" ] && ! grep -qs "plateforme de révision Labo MI" "$BIN/labomi"; }; then
+    echo "⚠ $BIN/labomi existe déjà et ne vient pas de ce projet : installation annulée." >&2
+    echo "  Supprime-le ou renomme-le toi-même si tu es sûr de toi." >&2
+    exit 1
+  fi
+fi
+
+# Dépendances d'abord : si ça échoue, rien d'autre n'est modifié
+(cd "$DIR" && { pnpm install --frozen-lockfile || pnpm install; })
+
 chmod +x "$DIR/bin/labomi"
 mkdir -p "$BIN"
 ln -sfn "$DIR/bin/labomi" "$BIN/labomi"
-(cd "$DIR" && { pnpm install --frozen-lockfile || pnpm install; })
 
 echo
 echo "✓ Commande installée : $BIN/labomi"
@@ -29,7 +41,17 @@ case ":$PATH:" in
     # Ajoute ~/.local/bin au PATH dans le fichier de config du shell (zsh par défaut sur macOS)
     case "$(basename "${SHELL:-bash}")" in
       zsh) RC="$HOME/.zshrc" ;;
-      bash) if [ "$(uname)" = "Darwin" ]; then RC="$HOME/.bash_profile"; else RC="$HOME/.bashrc"; fi ;;
+      bash)
+        if [ "$(uname)" = "Darwin" ]; then
+          # bash de connexion : lit le PREMIER fichier existant parmi ces trois.
+          # Créer ~/.bash_profile masquerait un ~/.profile existant, donc on réutilise l'existant.
+          RC="$HOME/.bash_profile"
+          for f in "$HOME/.bash_profile" "$HOME/.bash_login" "$HOME/.profile"; do
+            if [ -f "$f" ]; then RC="$f"; break; fi
+          done
+        else
+          RC="$HOME/.bashrc"
+        fi ;;
       *) RC="$HOME/.profile" ;;
     esac
     LINE='export PATH="$HOME/.local/bin:$PATH"'

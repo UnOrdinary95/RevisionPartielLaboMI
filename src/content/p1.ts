@@ -6,7 +6,9 @@ const RAPPEL_COMPLEXES = md`
 - Somme : $(a+ib) + (c+id) = (a+c) + i(b+d)$
 - Produit : $(a+ib)(c+id) = (ac - bd) + i(ad + bc)$ (car $i^2 = -1$)
 - Module : $|a+ib| = \sqrt{a^2+b^2}$ (distance à l'origine)
-- Conjugué : $\overline{a+ib} = a - ib$
+- Conjugué : $\overline{a+ib} = a - ib$, et $z\,\overline{z} = a^2 + b^2 = |z|^2$ (un réel)
+- Inverse / quotient : on multiplie en haut et en bas par le **conjugué du dénominateur** :
+  $\dfrac{1}{a+ib} = \dfrac{a - ib}{(a+ib)(a-ib)} = \dfrac{a - ib}{a^2+b^2}$
 `
 
 const RAPPEL_SUITE = md`

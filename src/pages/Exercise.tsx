@@ -13,6 +13,7 @@ import {
   ListTree,
   Loader2,
   Play,
+  RotateCcw,
   Timer,
 } from 'lucide-react'
 import { toast } from 'sonner'
@@ -122,7 +123,7 @@ export default function ExercisePage() {
   const index = Number(idxStr)
   const nav = useNavigate()
   const session = useProgress((s) => s.sessions[sid])
-  const { setDraft, addTime, recordAttempt, setSelfEval, viewSolution, setIndex, finish } = useProgress()
+  const { setDraft, addTime, recordAttempt, setSelfEval, viewSolution, resetItem, setIndex, finish } = useProgress()
 
   const exId = session?.exerciseIds[index]
   const ex = exId ? EXERCISES_BY_ID[exId] : undefined
@@ -169,6 +170,17 @@ export default function ExercisePage() {
     setRunning('run')
     setRunOut(await runCode(item.draft, ex.setup))
     setRunning(null)
+  }
+
+  const onReset = () => {
+    if (!ex || readOnly) return
+    if (!confirm('Recharger l’exercice ? Ton code, tes réponses envoyées et le chrono de cet exercice seront remis à zéro.')) return
+    resetItem(sid, ex.id)
+    setRunOut(null)
+    setReport(null)
+    setShowSolution(false)
+    setPreview(false)
+    toast('Exercice remis à zéro')
   }
 
   const onValidate = async () => {
@@ -381,6 +393,11 @@ export default function ExercisePage() {
             >
               <KeyRound className="size-3.5" /> {showSolution ? 'Masquer la solution' : 'Solution'}
             </Button>
+            {!readOnly && (
+              <Button variant="outline" size="sm" onClick={onReset} title="Remet le code, les réponses et le chrono à zéro">
+                <RotateCcw className="size-3.5" /> Recharger
+              </Button>
+            )}
             <div className="ml-auto flex items-center gap-2">
               {ex.kind === 'code' && (
                 <Button variant="outline" size="sm" onClick={onRun} disabled={!!running} title="Ctrl+Entrée">

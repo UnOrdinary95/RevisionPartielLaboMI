@@ -53,6 +53,7 @@ type State = {
   recordAttempt: (sid: string, exId: string, a: Attempt) => void
   setSelfEval: (sid: string, exId: string, ev: SelfEval) => void
   viewSolution: (sid: string, exId: string) => void
+  resetItem: (sid: string, exId: string) => void
   finish: (sid: string) => void
   deleteSession: (sid: string) => void
   createGroup: (name: string, ids: string[]) => string
@@ -244,6 +245,9 @@ export const useProgress = create<State>()(
           }),
 
         viewSolution: (sid, exId) => patchItem(sid, exId, (it) => ({ ...it, solutionViewed: true })),
+
+        /** Remet l'exercice à zéro : code de départ, réponses, chrono */
+        resetItem: (sid, exId) => patchItem(sid, exId, () => emptyItem(exId)),
 
         finish: (sid) =>
           set((st) =>

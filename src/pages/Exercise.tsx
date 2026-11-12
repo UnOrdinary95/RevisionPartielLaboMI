@@ -148,14 +148,15 @@ export default function ExercisePage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sid, index])
 
-  // chronomètre (temps actif)
+  // chronomètre (temps actif), arrêté dès que l'exercice est réussi à 100 %
+  const solved = lastScore(item) === 100
   useEffect(() => {
-    if (!exId || readOnly) return
+    if (!exId || readOnly || solved) return
     const t = window.setInterval(() => {
       if (document.visibilityState === 'visible') addTime(sid, exId, 1000)
     }, 1000)
     return () => window.clearInterval(t)
-  }, [sid, exId, readOnly, addTime])
+  }, [sid, exId, readOnly, solved, addTime])
 
   const goto = useCallback(
     (i: number) => {

@@ -674,9 +674,11 @@ $|z_2| = \sqrt{1+9} = \sqrt{10} > 2$, donc la suite diverge : $c \notin M$.
     source: 'Variante TP Pb1 A',
     tags: ['calcul', 'complexes'],
     statement: md`
+On note $(z_n)$ la suite définie par $z_0 = 0$ et $z_{n+1} = z_n^2 + c$. Le nombre $c$ appartient à l'ensemble de Mandelbrot $M$ si cette suite est **bornée**.
+
 Calculer $z_1, z_2, z_3, z_4$ pour $c = i$. En déduire que la suite est périodique à partir d'un certain rang, puis que $i \in M$.
 `,
-    reminder: RAPPEL_COMPLEXES,
+    reminder: RAPPEL_SUITE + '\n' + RAPPEL_COMPLEXES,
     answer: md`$z_1 = i$, $z_2 = -1+i$, $z_3 = -i$, $z_4 = -1+i = z_2$ : la suite est périodique, donc bornée, donc $i \in M$.`,
     solution: md`
 - $z_1 = i$
@@ -696,8 +698,11 @@ Comme $z_4 = z_2$ et que chaque terme ne dépend que du précédent, la suite al
     source: 'Variante TP Pb1 A',
     tags: ['calcul'],
     statement: md`
+On note $(z_n)$ la suite définie par $z_0 = 0$ et $z_{n+1} = z_n^2 + c$. Le nombre $c$ appartient à l'ensemble de Mandelbrot $M$ si cette suite est **bornée**.
+
 Pour chacune des valeurs $c = -1$, $c = -2$, $c = 1$ et $c = \tfrac14$, calculer les premiers termes de la suite et dire (en justifiant brièvement) si $c \in M$.
 `,
+    reminder: RAPPEL_SUITE,
     answer: md`$-1 \in M$ (cycle $0, -1$) ; $-2 \in M$ (stationnaire en $2$) ; $1 \notin M$ ($z_3 = 5$) ; $\tfrac14 \in M$ ($|c| \le \tfrac14$).`,
     solution: md`
 - $c = -1$ : $0, -1, 0, -1, \dots$ périodique, donc borné : $-1 \in M$.
@@ -739,10 +744,13 @@ Calculer :
     source: 'TP Pb1 B',
     tags: ['algorithme'],
     statement: md`
+Rappel : $c \in M$ (ensemble de Mandelbrot) si la suite $z_0 = 0$, $z_{n+1} = z_n^2 + c$ est bornée.
+
 L'algorithme §dansM(c, rang)§ calcule les termes jusqu'au rang §rang§ et conclut $c \in M$ si aucun terme n'a dépassé 2 en module.
 
 Dans quel cas peut-il se tromper ? Peut-il se tromper dans l'autre sens (dire $c \notin M$ alors que $c \in M$) ?
 `,
+    reminder: RAPPEL_SUITE,
     answer: md`Faux positif possible ($c \notin M$ mais échappement après §rang§) ; pas de faux négatif.`,
     solution: md`
 - Si $c \notin M$ mais que la suite ne dépasse 2 qu'**après** le rang §rang§ (rang d'échappement $>$ §rang§), l'algorithme répond à tort $c \in M$. Ça arrive près de la frontière de $M$.
@@ -760,10 +768,13 @@ Augmenter §rang§ réduit les faux positifs, mais coûte plus de calcul.
     source: 'TP Pb1 B (style « valeur exacte »)',
     tags: ['complexité'],
     statement: md`
+On note $(z_n)$ la suite définie par $z_0 = 0$ et $z_{n+1} = z_n^2 + c$. Le nombre $c$ appartient à l'ensemble de Mandelbrot $M$ si cette suite est **bornée**.
+
 Pour tester l'appartenance à $M$ jusqu'au rang $n$, une version naïve calcule §suite(k, c)§ pour $k = 1, 2, \dots, n$ (chaque appel repart de $z_0$).
 
 Combien d'itérations ($z \leftarrow z^2 + c$) fait-elle au total, dans le pire cas ? Et §dansM§ ? Donner des valeurs exactes.
 `,
+    reminder: RAPPEL_SUITE,
     answer: md`Naïf : $\frac{n(n+1)}{2}$ itérations ; §dansM§ : $n$.`,
     solution: md`
 §suite(k, c)§ fait $k$ itérations, donc au total
@@ -780,9 +791,11 @@ $$1 + 2 + \dots + n = \frac{n(n+1)}{2}$$
     source: 'TP Pb1 C',
     tags: ['preuve'],
     statement: md`
+On note $(z_n)$ la suite définie par $z_0 = 0$ et $z_{n+1} = z_n^2 + c$. Le nombre $c$ appartient à l'ensemble de Mandelbrot $M$ si cette suite est **bornée**.
+
 On pose $D = \{z \in \mathbb{C} \mid -2 \le \mathrm{Re}(z) \le 2 \text{ et } -2 \le \mathrm{Im}(z) \le 2\}$. Expliquer pourquoi $M \subset D$.
 `,
-    reminder: md`
+    reminder: RAPPEL_SUITE + '\n' + md`
 Pour tout $z$ : $|\mathrm{Re}(z)| \le |z|$ et $|\mathrm{Im}(z)| \le |z|$ (car $|z|^2 = \mathrm{Re}(z)^2 + \mathrm{Im}(z)^2$).
 `,
     answer: md`$z_1 = c$ ; si $c \in M$, $|c| = |z_1| \le 2$, donc $|\mathrm{Re}\,c|, |\mathrm{Im}\,c| \le 2$.`,
@@ -801,11 +814,13 @@ Or $|\mathrm{Re}(c)| \le |c| \le 2$ et $|\mathrm{Im}(c)| \le |c| \le 2$, donc $c
     source: 'TP Pb1 D.1',
     tags: ['récurrence', 'preuve'],
     statement: md`
+On note $(z_n)$ la suite définie par $z_0 = 0$ et $z_{n+1} = z_n^2 + c$. Le nombre $c$ appartient à l'ensemble de Mandelbrot $M$ si cette suite est **bornée**.
+
 Soit $c$ tel que $|c| \le \tfrac14$.
 1. Montrer par récurrence que $|z_n| \le \tfrac12$ pour tout $n \in \mathbb{N}$.
 2. En déduire un disque (centre, rayon) inclus dans $M$.
 `,
-    reminder: md`
+    reminder: RAPPEL_SUITE + '\n' + md`
 - Inégalité triangulaire : $|a + b| \le |a| + |b|$
 - $|z^2| = |z|^2$
 `,
@@ -830,6 +845,8 @@ Le **disque fermé de centre $0$ et de rayon $\tfrac14$** est inclus dans $M$.
     source: 'TP Pb1 D.2',
     tags: ['géométrie'],
     statement: md`
+Rappel : $c \in M$ (ensemble de Mandelbrot) si la suite $z_0 = 0$, $z_{n+1} = z_n^2 + c$ est bornée.
+
 À quelle transformation du plan correspond chacune des propriétés suivantes ?
 1. Si $c \in M$ alors $\overline{c} \in M$.
 2. Si $c \in M$ alors $-c \in M$.
@@ -837,6 +854,7 @@ Le **disque fermé de centre $0$ et de rayon $\tfrac14$** est inclus dans $M$.
 
 Laquelle est vérifiée par l'ensemble de Mandelbrot ?
 `,
+    reminder: RAPPEL_SUITE,
     answer: md`1 : axe réel · 2 : symétrie centrale (origine) · 3 : axe imaginaire. $M$ vérifie la 1.`,
     solution: md`
 Avec $c = a + ib$ :
@@ -875,8 +893,11 @@ $$\mathrm{Re}(f(\theta)) = \tfrac14 + \tfrac12\cos\theta\,(1 - \cos\theta), \qqu
     source: 'TP Pb1 E',
     tags: ['algorithme'],
     statement: md`
+Rappel : $c \in M$ (ensemble de Mandelbrot) si la suite $z_0 = 0$, $z_{n+1} = z_n^2 + c$ est bornée.
+
 Pour accélérer le tracé de $M$ par balayage d'une grille, on (1) ne fait pas appel à §dansM§ pour les points de module $\le \tfrac14$ et (2) ne parcourt que la moitié supérieure de la grille. Justifier chacune de ces deux idées, et dire pourquoi la première fait gagner beaucoup de temps.
 `,
+    reminder: RAPPEL_SUITE,
     answer: md`(1) disque $|c| \le \tfrac14$ inclus dans $M$ ; (2) symétrie par rapport à l'axe réel. Gain : les points de $M$ sont les plus coûteux (§rang§ itérations complètes).`,
     solution: md`
 1. Le disque $|c| \le \tfrac14$ est inclus dans $M$ : ces points y sont **à coup sûr**. Ce sont précisément les points de $M$ qui coûtent le plus cher, car §dansM§ va jusqu'au bout des §rang§ itérations sans s'arrêter.
@@ -894,11 +915,13 @@ Pour accélérer le tracé de $M$ par balayage d'une grille, on (1) ne fait pas 
     source: 'TP Pb1 G.1',
     tags: ['récurrence', 'preuve'],
     statement: md`
+On note $(z_n)$ la suite définie par $z_0 = 0$ et $z_{n+1} = z_n^2 + c$. Le nombre $c$ appartient à l'ensemble de Mandelbrot $M$ si cette suite est **bornée**.
+
 Soit $(z_n)$ la suite associée à $c$ et $(w_n)$ celle associée à $\bar c$ ($w_0 = 0$, $w_{n+1} = w_n^2 + \bar c$).
 1. Montrer par récurrence que $w_n = \overline{z_n}$ pour tout $n$.
 2. En déduire que si $c \in M$, alors $\bar c \in M$.
 `,
-    reminder: md`$\overline{a + b} = \bar a + \bar b$, $\overline{ab} = \bar a\, \bar b$ (donc $\overline{z^2} = \bar z^2$), $|\bar z| = |z|$.`,
+    reminder: RAPPEL_SUITE + '\n' + md`$\overline{a + b} = \bar a + \bar b$, $\overline{ab} = \bar a\, \bar b$ (donc $\overline{z^2} = \bar z^2$), $|\bar z| = |z|$.`,
     answer: md`$w_{n+1} = \overline{z_n}^2 + \bar c = \overline{z_n^2 + c} = \overline{z_{n+1}}$ ; puis $|w_n| = |z_n|$.`,
     solution: md`
 **Initialisation** : $w_0 = 0 = \overline{0} = \overline{z_0}$.
@@ -918,9 +941,11 @@ $$w_{n+1} = w_n^2 + \bar c = \overline{z_n}^{\,2} + \bar c = \overline{z_n^2} + 
     source: 'TP Pb1 G.2.1',
     tags: ['inégalité'],
     statement: md`
+On note $(z_n)$ la suite définie par $z_0 = 0$ et $z_{n+1} = z_n^2 + c$. Le nombre $c$ appartient à l'ensemble de Mandelbrot $M$ si cette suite est **bornée**.
+
 Montrer que pour tout $n \in \mathbb{N}$ : $|z_{n+1}| \ge |z_n|^2 - |c|$.
 `,
-    reminder: md`Inégalité triangulaire « inverse » : $|a + b| \ge |a| - |b|$.`,
+    reminder: RAPPEL_SUITE + '\n' + md`Inégalité triangulaire « inverse » : $|a + b| \ge |a| - |b|$.`,
     answer: md`$|z_{n+1}| = |z_n^2 + c| \ge |z_n^2| - |c| = |z_n|^2 - |c|$`,
     solution: md`
 On applique $|a + b| \ge |a| - |b|$ avec $a = z_n^2$ et $b = c$ :
@@ -939,8 +964,11 @@ car $|z^2| = |z|^2$ (module d'un produit).
     source: 'TP Pb1 G.2.2 a',
     tags: ['récurrence', 'preuve'],
     statement: md`
+On note $(z_n)$ la suite définie par $z_0 = 0$ et $z_{n+1} = z_n^2 + c$. Le nombre $c$ appartient à l'ensemble de Mandelbrot $M$ si cette suite est **bornée**.
+
 On suppose $|c| > 2$. Montrer par récurrence que $|z_n| \ge |c|$ pour tout $n \ge 1$ (on pourra utiliser $|z_{n+1}| \ge |z_n|^2 - |c|$).
 `,
+    reminder: RAPPEL_SUITE,
     answer: md`$|z_{n+1}| \ge |c|^2 - |c| = |c|(|c|-1) > |c|$ car $|c| - 1 > 1$.`,
     solution: md`
 **Initialisation** : $z_1 = c$, donc $|z_1| = |c|$.

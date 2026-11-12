@@ -6,6 +6,47 @@ import rehypeKatex from 'rehype-katex'
 import { CodeEditor } from './CodeEditor'
 import { cn } from '@/lib/utils'
 
+/**
+ * Un bloc $$…$$ doit être entouré de lignes vides pour être rendu en mode « display » :
+ * sinon remark-math le colle au paragraphe voisin comme une formule en ligne.
+ * On ajoute ces lignes vides (hors blocs de code).
+ */
+function isolateDisplayMath(src: string) {
+  const lines = src.split('\n')
+  const out: string[] = []
+  let inCode = false
+  let inMath = false
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i]
+    const t = line.trim()
+    if (t.startsWith('```')) inCode = !inCode
+    if (inCode) {
+      out.push(line)
+      continue
+    }
+    if (!inMath && t.startsWith('$$')) {
+      if (out.length && out[out.length - 1].trim() !== '') out.push('')
+      const indent = line.slice(0, line.length - line.trimStart().length)
+      const oneLine = t.length > 4 && t.endsWith('$$')
+      if (oneLine) {
+        // « $$ x $$ » sur une ligne = formule EN LIGNE pour remark-math 6 : on l'étale sur 3 lignes
+        out.push(indent + '$$', indent + t.slice(2, -2).trim(), indent + '$$')
+        if (i + 1 < lines.length && lines[i + 1].trim() !== '') out.push('')
+      } else {
+        out.push(line)
+        inMath = true
+      }
+      continue
+    }
+    out.push(line)
+    if (inMath && t.endsWith('$$')) {
+      inMath = false
+      if (i + 1 < lines.length && lines[i + 1].trim() !== '') out.push('')
+    }
+  }
+  return out.join('\n')
+}
+
 export function Markdown({ children, className, breaks }: { children: string; className?: string; breaks?: boolean }) {
   return (
     <div className={cn('prose-md', className)}>
@@ -29,7 +70,7 @@ export function Markdown({ children, className, breaks }: { children: string; cl
           },
         }}
       >
-        {children}
+        {isolateDisplayMath(children)}
       </ReactMarkdown>
     </div>
   )

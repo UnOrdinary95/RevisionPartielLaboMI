@@ -1298,9 +1298,12 @@ $$0 \le e - \sum_{k=0}^n \frac{1}{k!} \le \frac{e}{(n+1)!} \le \frac{3}{(n+1)!}.
     source: 'TP Pb3 B.1 (style « valeur exacte »)',
     tags: ['complexité'],
     statement: md`
+§approx_e(n)§ calcule $\displaystyle\sum_{k=0}^n \frac{1}{k!}$, qui approche $e$ avec une erreur $\le \frac{3}{(n+1)!}$.
+
 1. Combien de multiplications (pour les factorielles) et d'additions fait §approx_e(n)§ avec la factorielle incrémentale ? Et si l'on recalcule $k!$ de zéro à chaque terme (boucle de $2$ à $k$) ?
 2. Quel $n$ faut-il pour garantir 3 décimales correctes (erreur $< 10^{-4}$) ?
 `,
+    reminder: RAPPEL_FACT,
     answer: md`1. $n$ multiplications et $n$ additions, contre $\sum_{k=2}^n (k-1) = \frac{n(n-1)}{2}$ multiplications. 2. $3/(n+1)! < 10^{-4}$ donne $n = 7$.`,
     solution: md`
 1. Incrémental : une multiplication §fact *= k§ et une addition par $k = 1..n$, soit $n$ de chaque. Naïf : $k!$ coûte $k - 1$ multiplications, d'où $\sum_{k=1}^n (k-1) = \frac{n(n-1)}{2}$ (quadratique).
@@ -1451,8 +1454,11 @@ Pour $n = 2$, on retrouve $\frac12\left(x_k + \frac{a}{x_k}\right)$.
     source: 'TP Pb3 C.1 Q3',
     tags: ['newton'],
     statement: md`
+Pour calculer $\sqrt a$, la méthode de Newton utilise la suite $x_{k+1} = \frac12\left(x_k + \frac{a}{x_k}\right)$.
+
 En calculant $\sqrt2$ par Newton, comment évolue le nombre de décimales correctes d'une itération à l'autre ? Pourquoi la méthode s'arrête-t-elle après quelques itérations seulement ?
 `,
+    reminder: RAPPEL_NEWTON,
     answer: md`Il **double** environ à chaque itération (convergence quadratique) ; après 5 ou 6 itérations, on atteint la précision des floats (~16 chiffres).`,
     solution: md`
 On a $x_{k+1} - \sqrt a = \frac{(x_k - \sqrt a)^2}{2x_k}$ : l'erreur est **élevée au carré** à chaque étape. Si $|x_k - \sqrt a| \approx 10^{-n}$, alors $|x_{k+1} - \sqrt a| \approx 10^{-2n}$, donc le nombre de décimales correctes double.

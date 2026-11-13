@@ -601,7 +601,7 @@ def points_dans_M(n, rang):
     problem: 1,
     kind: 'code',
     title: 'dansJ(alpha, c, rang) : ensemble de Julia',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb1 H',
     tags: ['suite', 'julia'],
     statement: md`
@@ -696,7 +696,7 @@ Comme $z_4 = z_2$ et que chaque terme ne dépend que du précédent, la suite al
     problem: 1,
     kind: 'math',
     title: 'Appartenance à M pour c = −1, −2, 1, 1/4',
-    stars: 2,
+    stars: 1,
     source: 'Variante TP Pb1 A',
     tags: ['calcul'],
     statement: md`
@@ -742,7 +742,7 @@ Calculer :
     problem: 1,
     kind: 'math',
     title: "Limite de l'algorithme d'appartenance",
-    stars: 2,
+    stars: 1,
     source: 'TP Pb1 B',
     tags: ['algorithme'],
     statement: md`
@@ -789,7 +789,7 @@ $$1 + 2 + \dots + n = \frac{n(n+1)}{2}$$
     problem: 1,
     kind: 'math',
     title: 'Justifier M ⊂ D',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb1 C',
     tags: ['preuve'],
     statement: md`
@@ -939,7 +939,7 @@ $$w_{n+1} = w_n^2 + \bar c = \overline{z_n}^{\,2} + \bar c = \overline{z_n^2} + 
     problem: 1,
     kind: 'math',
     title: 'Minoration |z_{n+1}| ≥ |z_n|² − |c|',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb1 G.2.1',
     tags: ['inégalité'],
     statement: md`

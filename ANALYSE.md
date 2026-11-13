@@ -38,7 +38,37 @@ Fiches associées : [[P1-Mandelbrot-complexes]] · [[P2-Polynomes]] · [[P3-e-pi
 
 ---
 
-## 3. Inventaire complet de ce qui peut tomber
+## 3. Révision du 13/11 : ce qu'on écarte
+
+Critères : en **1h**, il faut des **automatismes**. Chaque question doit **avoir un sens toute seule** (3 ou 4 questions au total, pas plusieurs exercices sur le même sujet), et certains TP datent d'un mois. Ces éléments sont donc jugés improbables et **masqués sur la plateforme** (passés en ★) :
+
+| Problème | Écarté | Pourquoi |
+|---|---|---|
+| P1 | `dansJ`, symétrie de Julia | Le sujet, c'est Mandelbrot ; Julia est une extension |
+| P1 | Appartenance à $M$ pour $c=-1,-2,1,\frac14$ | Trop long (4 suites à dérouler) |
+| P1 | Limite de l'algorithme d'appartenance | N'a pas de sens isolément |
+| P1 | Justifier $M\subset D$ | N'a pas de sens isolément |
+| P1 | Minoration $\lvert z_{n+1}\rvert\ge\lvert z_n\rvert^2-\lvert c\rvert$ | Trop poussé pour 1h |
+| P2 | Pourquoi retirer les 0 finaux | Improbable |
+| P2 | Énoncé du TVI | Improbable |
+| P3 | Tout Newton : `mysqrt`, `nthroot`, Newton générique, récurrences, vitesse, erreur | Tiré par les cheveux sur papier |
+| P3 | Tout `arctan` : `approx_arctan` (float et `Rat`), rangs, $\arctan 1=\frac\pi4$ | Improbable |
+| P3 | Leibniz (code et erreur), $\tan(2\arctan\frac15)$, Machin | Improbable (calculatrice sans doute interdite) |
+| P3 | `mat_inversible` et le déterminant flottant | Improbable |
+| P3 | Comparer deux fractions sans division (question de maths) | Improbable |
+| P3 | Taylor-Lagrange pour $e$ | Trop long pour 1h |
+
+**Ce qui reste en jeu** (54 exercices) :
+- **P1** : les classes `Complexe`, `suite`, `dansM`, `rang_echap`, `argument`/`cardioïde`, les termes à la main, les calculs sur les complexes, le coût de `dansM`, les récurrences (disque, conjugué), les symétries.
+- **P2** : toute la classe `Poly`, Horner (code, à la main, coût), `derive`, `compose`, la dichotomie, les degrés de la somme, du produit et de la composée.
+- **P3** : $\sum\frac1{k!}$, `rang_approx_e`, `approx_e`, la classe `Rat` (opérations, comparaisons), `pgcd`, `ceilsqrt`, la somme $\frac1{k^4}$ en ordre inverse, les fractions irréductibles et les floats (0.2 contre 0.25).
+
+> [!note]
+> Les verdicts de la section suivante sont ceux de l'analyse initiale : en cas de désaccord, c'est ce tableau qui prime.
+
+---
+
+## 4. Inventaire complet de ce qui peut tomber
 
 ★★★ très probable · ★★ probable · ★ possible · ✗ écarté (raison indiquée). **C** = code, **M** = maths.
 
@@ -170,7 +200,7 @@ Fiches associées : [[P1-Mandelbrot-complexes]] · [[P2-Polynomes]] · [[P3-e-pi
 
 ---
 
-## 4. À savoir écrire les yeux fermés
+## 5. À savoir écrire les yeux fermés
 
 - [ ] Classe `Complexe` : `__init__`, `__repr__`, `__add__`, `__mul__`, `module`
 - [ ] Classe `Poly` : `__init__` (sans 0 finaux), `__repr__`, `degre`, `eval`, `derive`, `__add__`, `__mul__`
@@ -179,13 +209,12 @@ Fiches associées : [[P1-Mandelbrot-complexes]] · [[P2-Polynomes]] · [[P3-e-pi
 - [ ] `evalHorner`, `derive`
 - [ ] $\sum_{k=1}^{20}1/k!$ avec factorielle incrémentale
 - [ ] `approx_e(n)`, `rang_approx_e(delta)` sans `factorial`
-- [ ] `approx_arctan(x, n)`
-- [ ] `ceilsqrt(x)`, `mysqrt(x)`
-- [ ] À la main : $z_1..z_3$, $P\times Q$, Horner, fraction irréductible, Newton pour $x^2-a$
+- [ ] `ceilsqrt(x)`, `pgcd(a, b)` (Euclide)
+- [ ] À la main : $z_1..z_3$, $P\times Q$, Horner, fraction irréductible, opérations sur les fractions
 
 ---
 
-## 5. Pièges relevés dans tes rendus
+## 6. Pièges relevés dans tes rendus
 
 - **Pb2 `__add__`** : tu ajoutes des 0 à `self.coeff` et `other.coeff`, puis tu les retires. C'est un effet de bord : une opération `+` ne doit jamais modifier ses opérandes. Il faut créer une nouvelle liste.
 - **Pb2 C1** : `sum` n'est pas « quasi constant ». Il est lui aussi linéaire, mais codé en C, donc beaucoup plus rapide.
@@ -198,7 +227,7 @@ Fiches associées : [[P1-Mandelbrot-complexes]] · [[P2-Polynomes]] · [[P3-e-pi
 
 ---
 
-## 6. Stratégie de copie (1h)
+## 7. Stratégie de copie (1h)
 
 1. **Lire tout le sujet** (2 min), puis commencer par la **classe**, la plus rentable et la plus mécanique (~20 min).
 2. Faire les **calculs à la main** « sans justifier » tout de suite : points rapides.

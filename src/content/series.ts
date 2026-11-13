@@ -44,9 +44,9 @@ export const MOCKS: SeriesDef[] = [
     id: 'mock-c',
     kind: 'mock',
     title: 'Partiel blanc C',
-    subtitle: 'Classe Complexe · dérivée · Newton',
+    subtitle: 'Classe Complexe · dérivée · e',
     timeLimit: 60,
-    exerciseIds: ['p1-complexe-classe', 'p2-m-calculs2', 'p2-derive', 'p3-m-newton-sqrt', 'p3-mysqrt'],
+    exerciseIds: ['p1-complexe-classe', 'p2-m-calculs2', 'p2-derive', 'p3-m-025-02', 'p3-somme-fact'],
   },
 ]
 

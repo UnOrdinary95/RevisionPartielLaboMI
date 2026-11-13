@@ -503,7 +503,7 @@ En ordre croissant ($k = 1 \to n$), dès $k \approx 10^4$ on a $1/k^4 \approx 10
     problem: 3,
     kind: 'code',
     title: 'mat_inversible avec tolérance',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb3 A.1 Q3',
     tags: ['float'],
     statement: md`
@@ -669,7 +669,7 @@ $1 + 1 + \frac12 + \frac16 = \frac{16}{6} = \frac83$.
     problem: 3,
     kind: 'code',
     title: 'rang_approx_arctan(x, delta)',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb3 B.3.1',
     tags: ['approximation', 'arctan'],
     statement: md`
@@ -709,7 +709,7 @@ Pour $x = 1$ : $\frac{1}{2n+1} < 10^{-4} \iff 2n + 1 > 10^4 \iff n \ge 5000$. Po
     problem: 3,
     kind: 'code',
     title: 'approx_arctan(x, n) en float',
-    stars: 3,
+    stars: 1,
     source: 'TP Pb3 B.3.1',
     tags: ['arctan', 'efficacité'],
     statement: md`
@@ -753,7 +753,7 @@ def approx_arctan(x, n):
     problem: 3,
     kind: 'code',
     title: 'approx_arctan avec Rat',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb3 B.3.1',
     tags: ['arctan', 'rationnels'],
     statement: md`
@@ -800,7 +800,7 @@ $\frac15 - \frac{1}{375} = \frac{75 - 1}{375} = \frac{74}{375}$.
     problem: 3,
     kind: 'code',
     title: 'π par la formule de Leibniz',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb3 B.3.2',
     tags: ['pi', 'arctan'],
     statement: md`
@@ -915,7 +915,7 @@ Coût en $O(\sqrt x)$ : ça suffit pour une estimation initiale de Newton.
     problem: 3,
     kind: 'code',
     title: 'mysqrt(x) par la méthode de Newton',
-    stars: 3,
+    stars: 1,
     source: 'TP Pb3 C.1',
     tags: ['newton'],
     statement: md`
@@ -967,7 +967,7 @@ Partir de §ceilsqrt(x)§ $\ge \sqrt x$ garantit une suite décroissante vers $\
     problem: 3,
     kind: 'code',
     title: 'nthroot(a, n) : racine n-ième par Newton',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb3 C.2',
     tags: ['newton'],
     statement: md`
@@ -1016,7 +1016,7 @@ Pour $n = 2$, on retrouve exactement la formule de §mysqrt§.
     problem: 3,
     kind: 'code',
     title: 'Méthode de Newton générique',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb3 C (généralisation)',
     tags: ['newton'],
     statement: md`
@@ -1140,7 +1140,7 @@ $\pi$ et $e$ sont irrationnels (développement infini) : on stocke le float le p
     problem: 3,
     kind: 'math',
     title: 'Déterminant flottant faux',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb3 A.1 Q3',
     tags: ['float'],
     statement: md`
@@ -1254,7 +1254,7 @@ $$x + y = \frac{ad + bc}{bd}, \quad x - y = \frac{ad - bc}{bd}, \quad xy = \frac
     problem: 3,
     kind: 'math',
     title: 'Comparer deux fractions sans division',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb3 A.2.2 Q3',
     tags: ['rationnels'],
     statement: md`
@@ -1272,7 +1272,7 @@ La division §a / b§ produit un float, sujet aux erreurs d'arrondi, alors que l
     problem: 3,
     kind: 'math',
     title: 'Taylor-Lagrange pour e',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb3 B.1.1',
     tags: ['analyse'],
     statement: md`
@@ -1315,7 +1315,7 @@ $$0 \le e - \sum_{k=0}^n \frac{1}{k!} \le \frac{e}{(n+1)!} \le \frac{3}{(n+1)!}.
     problem: 3,
     kind: 'math',
     title: 'Définition de arctan, arctan(1) = π/4',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb3 B.3.1',
     tags: ['trigonométrie'],
     statement: md`
@@ -1333,7 +1333,7 @@ Comme $\tan\frac\pi4 = \frac{\sin(\pi/4)}{\cos(\pi/4)} = 1$ et $\frac\pi4 \in ]-
     problem: 3,
     kind: 'math',
     title: 'Rang pour 3 décimales de arctan(1) et arctan(1/5)',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb3 B.3.1',
     tags: ['approximation'],
     statement: md`
@@ -1350,7 +1350,7 @@ L'erreur de $\sum_{k=0}^{n-1} (-1)^k \frac{x^{2k+1}}{2k+1}$ est $\le \frac{x^{2n
     problem: 3,
     kind: 'math',
     title: 'Erreur de Leibniz et nombre de termes',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb3 B.3.2',
     tags: ['pi', 'approximation'],
     statement: md`
@@ -1371,7 +1371,7 @@ Chaque décimale supplémentaire multiplie le nombre de termes par 10 : la conve
     problem: 3,
     kind: 'math',
     title: 'tan(2 arctan(1/5))',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb3 B.3.3',
     tags: ['trigonométrie', 'calcul'],
     statement: md`
@@ -1411,7 +1411,7 @@ Sachant que $A = \tan(2\arctan\frac15) = \frac5{12}$ :
     problem: 3,
     kind: 'math',
     title: 'Récurrence de Newton pour x² − a',
-    stars: 3,
+    stars: 1,
     source: 'TP Pb3 C Q1',
     tags: ['newton'],
     statement: md`
@@ -1432,7 +1432,7 @@ Avec $a = 2$ et $x_0 = 2$ : $x_1 = \frac12(2 + 1) = \frac32$, puis $x_2 = \frac1
     problem: 3,
     kind: 'math',
     title: 'Récurrence de Newton pour xⁿ − a',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb3 C.2',
     tags: ['newton'],
     statement: md`
@@ -1450,7 +1450,7 @@ Pour $n = 2$, on retrouve $\frac12\left(x_k + \frac{a}{x_k}\right)$.
     problem: 3,
     kind: 'math',
     title: 'Vitesse de convergence de Newton',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb3 C.1 Q3',
     tags: ['newton'],
     statement: md`
@@ -1471,7 +1471,7 @@ Exemple : $x_0 = 2$, puis $1.5$, $1.41667$, $1.4142157$, $1.41421356237469$, $1.
     problem: 3,
     kind: 'math',
     title: 'Newton : positivité et formule de l’erreur',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb3 C.3',
     tags: ['newton', 'preuve'],
     statement: md`

@@ -1031,7 +1031,7 @@ Astuce : $P(1)$ = somme des coefficients.
     problem: 2,
     kind: 'math',
     title: 'Pourquoi retirer les 0 finaux ?',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb2 B1',
     tags: ['représentation'],
     statement: md`
@@ -1206,7 +1206,7 @@ $A(B) = (X+1)^2 = X^2 + 2X + 1$ mais $B(A) = X^2 + 1$.
     problem: 2,
     kind: 'math',
     title: 'Théorème des valeurs intermédiaires',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb2 E',
     tags: ['TVI'],
     statement: md`

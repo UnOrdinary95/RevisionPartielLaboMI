@@ -118,9 +118,9 @@ export default function Dashboard() {
           <Bar key={p} label={`P${p} · ${PROBLEMS[p].short}`} stats={stats} ids={ALL_EXERCISES.filter((e) => e.problem === p).map((e) => e.id)} />
         ))}
       </div>
-      <div className="grid gap-4 md:grid-cols-3">
-        {[3, 2, 1].map((n) => (
-          <Bar key={n} label={`${'★'.repeat(n)} ${n === 3 ? 'très probable' : n === 2 ? 'probable' : 'possible'}`} stats={stats} ids={ALL_EXERCISES.filter((e) => e.stars === n).map((e) => e.id)} />
+      <div className="grid gap-4 md:grid-cols-2">
+        {[3, 2].map((n) => (
+          <Bar key={n} label={`${'★'.repeat(n)} ${n === 3 ? 'très probable' : 'probable'}`} stats={stats} ids={ALL_EXERCISES.filter((e) => e.stars === n).map((e) => e.id)} />
         ))}
       </div>
 

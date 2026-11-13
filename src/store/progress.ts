@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { ALL_EXERCISES, EXERCISES_BY_ID } from '@/content'
+import { ALL_EXERCISES, EXERCISES_BY_ID, isVisible } from '@/content'
 import { randomMockIds, STATIC_SERIES, type SeriesDef } from '@/content/series'
 
 export type SelfEval = 'yes' | 'partial' | 'no'
@@ -153,7 +153,7 @@ function resolveIds(def: SeriesDef, sessions: Record<string, Session>): string[]
     return ALL_EXERCISES.filter((e) => isWeak(stats[e.id])).map((e) => e.id)
   }
   if (def.kind === 'random-mock') return randomMockIds()
-  return (def.exerciseIds ?? []).filter((id) => EXERCISES_BY_ID[id])
+  return (def.exerciseIds ?? []).filter(isVisible)
 }
 
 function emptyItem(exId: string): ItemState {
@@ -208,8 +208,16 @@ export const useProgress = create<State>()(
 
         launch: (seriesId) => {
           const cur = get().activeBySeries[seriesId]
-          if (cur && get().sessions[cur]) return cur
-          return create(seriesId)
+          const s = cur ? get().sessions[cur] : undefined
+          if (!s) return create(seriesId)
+          // une session en cours peut contenir des exercices masqués depuis (★) : on les retire
+          if (s.status === 'active' && s.exerciseIds.some((id) => !isVisible(id))) {
+            const keep = s.exerciseIds.filter(isVisible)
+            const curId = s.exerciseIds[s.currentIndex]
+            const idx = Math.max(0, keep.indexOf(curId))
+            set((st) => ({ sessions: { ...st.sessions, [s.id]: { ...s, exerciseIds: keep, currentIndex: idx } } }))
+          }
+          return s.id
         },
 
         restart: (seriesId) => {

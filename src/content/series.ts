@@ -53,7 +53,7 @@ export const MOCKS: SeriesDef[] = [
 export const STATIC_SERIES: SeriesDef[] = [
   { id: 'p1', kind: 'problem', problem: 1, title: 'Problème 1 · Mandelbrot', subtitle: 'Complexes, suites, récurrences', exerciseIds: problemIds(1) },
   { id: 'p2', kind: 'problem', problem: 2, title: 'Problème 2 · Polynômes', subtitle: 'Classe Poly, Horner, degrés', exerciseIds: problemIds(2) },
-  { id: 'p3', kind: 'problem', problem: 3, title: 'Problème 3 · e, π, √', subtitle: 'Floats, Rat, séries, Newton', exerciseIds: problemIds(3) },
+  { id: 'p3', kind: 'problem', problem: 3, title: 'Problème 3 · Floats, Rat, e', subtitle: 'Rationnels, floats, factorielle', exerciseIds: problemIds(3) },
   {
     id: 'essentials',
     kind: 'essentials',

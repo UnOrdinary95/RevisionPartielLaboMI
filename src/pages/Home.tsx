@@ -112,7 +112,7 @@ export default function Home() {
   const by = (k: string) => STATIC_SERIES.filter((s) => s.kind === k)
 
   return (
-    <div className="mx-auto max-w-7xl space-y-8 p-6">
+    <div className="mx-auto max-w-7xl space-y-8 p-3 sm:p-6">
       <header className="space-y-1">
         <h1 className="text-xl font-semibold tracking-tight">Entraînement · partiel Labo Math-Info</h1>
         <p className="text-sm text-muted-foreground">

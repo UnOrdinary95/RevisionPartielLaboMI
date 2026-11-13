@@ -249,7 +249,7 @@ export default function ExercisePage() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl space-y-4 p-6">
+    <div className="mx-auto max-w-5xl space-y-4 p-3 sm:p-6">
       {/* barre du haut */}
       <div className="flex flex-wrap items-center gap-3">
         <Link to="/" className="text-sm text-muted-foreground hover:text-foreground">
@@ -275,7 +275,7 @@ export default function ExercisePage() {
 
       {/* carte exercice */}
       <div className="overflow-hidden rounded-xl border border-border bg-card">
-        <div className="flex flex-wrap items-center gap-3 border-b border-border bg-muted/30 px-5 py-3">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-border bg-muted/30 px-3 py-3 sm:px-5">
           <StatusIcon status={itemStatus(item)} className="size-5" />
           <h1 className="font-medium">{ex.title}</h1>
           <Stars n={ex.stars} />
@@ -287,7 +287,7 @@ export default function ExercisePage() {
           </div>
         </div>
 
-        <div className="space-y-4 p-5">
+        <div className="space-y-4 p-3 sm:p-5">
           <Markdown>{ex.statement}</Markdown>
           {ex.source && <p className="text-xs text-muted-foreground">Source : {ex.source}</p>}
 

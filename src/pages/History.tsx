@@ -41,8 +41,8 @@ export default function HistoryPage() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl space-y-5 p-6">
-      <div className="flex items-end gap-3">
+    <div className="mx-auto max-w-6xl space-y-5 p-3 sm:p-6">
+      <div className="flex flex-wrap items-end gap-3">
         <div>
           <h1 className="text-xl font-semibold">Historique des sessions</h1>
           <p className="text-sm text-muted-foreground">{list.length} session(s). La progression est stockée dans ce navigateur.</p>
@@ -56,14 +56,14 @@ export default function HistoryPage() {
         <p className="rounded-xl border border-dashed border-border p-10 text-center text-sm text-muted-foreground">Aucune session pour l’instant.</p>
       ) : (
         <div className="overflow-hidden rounded-xl border border-border">
-          <Table>
+          <Table className="[&_td]:px-1.5 [&_th]:px-1.5 sm:[&_td]:px-2 sm:[&_th]:px-2">
             <TableHeader>
               <TableRow className="bg-muted/40">
                 <TableHead>Série</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead className="text-center">Statut</TableHead>
+                <TableHead className="hidden sm:table-cell">Date</TableHead>
+                <TableHead className="hidden text-center sm:table-cell">Statut</TableHead>
                 <TableHead className="text-center">Progression</TableHead>
-                <TableHead className="text-center">Durée</TableHead>
+                <TableHead className="hidden text-center sm:table-cell">Durée</TableHead>
                 <TableHead className="text-center">Note</TableHead>
                 <TableHead />
               </TableRow>
@@ -74,11 +74,11 @@ export default function HistoryPage() {
                 const [label, cls] = STATUS[s.status]
                 return (
                   <TableRow key={s.id} className="cursor-pointer" onClick={() => nav(`/s/${s.id}/recap`)}>
-                    <TableCell className="font-medium">{s.title}</TableCell>
-                    <TableCell className="text-muted-foreground">{new Date(s.createdAt).toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'short' })}</TableCell>
-                    <TableCell className="text-center"><Badge variant="outline" className={cls}>{label}</Badge></TableCell>
+                    <TableCell className="font-medium whitespace-normal">{s.title}</TableCell>
+                    <TableCell className="hidden text-muted-foreground sm:table-cell">{new Date(s.createdAt).toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'short' })}</TableCell>
+                    <TableCell className="hidden text-center sm:table-cell"><Badge variant="outline" className={cls}>{label}</Badge></TableCell>
                     <TableCell className="text-center tabular-nums">{p.done}/{p.total}</TableCell>
-                    <TableCell className="text-center tabular-nums">{formatDuration(sessionTime(s))}</TableCell>
+                    <TableCell className="hidden text-center tabular-nums sm:table-cell">{formatDuration(sessionTime(s))}</TableCell>
                     <TableCell className="text-center font-medium tabular-nums">{sessionScore(s)}</TableCell>
                     <TableCell className="text-right">
                       <Button

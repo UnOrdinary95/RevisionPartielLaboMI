@@ -34,14 +34,14 @@ export default function Sheets() {
       </div>
     )
   return (
-    <div className="mx-auto flex max-w-6xl gap-6 p-6">
-      <nav className="sticky top-6 hidden h-fit w-56 shrink-0 space-y-0.5 md:block">
+    <div className="mx-auto flex max-w-6xl flex-col gap-3 p-3 sm:p-6 md:flex-row md:gap-6">
+      <nav className="flex gap-1 overflow-x-auto pb-1 md:sticky md:top-6 md:block md:h-fit md:w-56 md:shrink-0 md:space-y-0.5 md:overflow-visible md:pb-0">
         {SHEETS.map((s) => (
           <NavLink
             key={s.slug}
             to={`/fiches/${s.slug}`}
             className={cn(
-              'flex items-center gap-2 rounded-md px-2.5 py-1.5 text-sm text-muted-foreground hover:bg-muted hover:text-foreground',
+              'flex shrink-0 items-center gap-2 rounded-md px-2.5 py-1.5 text-sm whitespace-nowrap text-muted-foreground hover:bg-muted hover:text-foreground',
               s.slug === cur.slug && 'bg-muted text-foreground',
             )}
           >
@@ -49,7 +49,7 @@ export default function Sheets() {
           </NavLink>
         ))}
       </nav>
-      <article className="min-w-0 flex-1 rounded-xl border border-border bg-card px-8 py-6">
+      <article className="min-w-0 flex-1 rounded-xl border border-border bg-card px-4 py-4 sm:px-8 sm:py-6">
         <Markdown breaks>{obsidianToMd(cur.src)}</Markdown>
       </article>
     </div>

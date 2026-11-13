@@ -4,7 +4,9 @@ import { indentUnit } from '@codemirror/language'
 import { EditorView } from '@codemirror/view'
 import { vscodeDark } from '@uiw/codemirror-theme-vscode'
 
-const extensions = [python(), indentUnit.of('    '), EditorView.lineWrapping]
+// Retour à la ligne pour écrire (y compris sur téléphone) ; défilement horizontal en lecture seule
+const editExtensions = [python(), indentUnit.of('    '), EditorView.lineWrapping]
+const readExtensions = [python(), indentUnit.of('    ')]
 
 /**
  * Éditeur Python « conditions d'examen » : coloration syntaxique,
@@ -31,7 +33,7 @@ export function CodeEditor({
         readOnly={readOnly}
         editable={!readOnly}
         theme={vscodeDark}
-        extensions={extensions}
+        extensions={readOnly ? readExtensions : editExtensions}
         minHeight={minHeight}
         maxHeight={maxHeight}
         indentWithTab

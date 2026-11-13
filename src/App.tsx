@@ -1,5 +1,5 @@
 import { createHashRouter, NavLink, Outlet, RouterProvider } from 'react-router'
-import { BarChart3, BookOpen, History, House, Sigma } from 'lucide-react'
+import { BarChart3, BookOpen, GraduationCap, History, House, Sigma } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { Toaster } from '@/components/ui/sonner'
@@ -11,9 +11,11 @@ import Recap from '@/pages/Recap'
 import Dashboard from '@/pages/Dashboard'
 import HistoryPage from '@/pages/History'
 import Sheets from '@/pages/Sheets'
+import Revision from '@/pages/Revision'
 
 const NAV = [
   { to: '/', label: 'Accueil', icon: House, end: true },
+  { to: '/revision', label: 'Révision', icon: GraduationCap },
   { to: '/dashboard', label: 'Dashboard', icon: BarChart3 },
   { to: '/historique', label: 'Historique', icon: History },
   { to: '/fiches', label: 'Fiches', icon: BookOpen },
@@ -43,7 +45,7 @@ function Layout() {
   }, [])
   return (
     <div className="flex h-full">
-      <aside className="flex w-14 shrink-0 flex-col border-r border-border bg-sidebar lg:w-52">
+      <aside className="hidden w-14 shrink-0 flex-col border-r border-border bg-sidebar md:flex lg:w-52">
         <div className="flex h-14 items-center gap-2 px-4">
           <Sigma className="size-5 text-amber-500" />
           <span className="hidden text-sm font-semibold tracking-tight lg:inline">Labo MI · Partiel</span>
@@ -70,9 +72,28 @@ function Layout() {
           <PyBadge />
         </div>
       </aside>
-      <main className="min-w-0 flex-1 overflow-y-auto">
+      <main className="min-w-0 flex-1 overflow-y-auto pb-16 md:pb-0">
         <Outlet />
       </main>
+      {/* Barre d'onglets en bas sur téléphone */}
+      <nav className="fixed inset-x-0 bottom-0 z-40 flex border-t border-border bg-sidebar/95 backdrop-blur md:hidden">
+        {NAV.map(({ to, label, icon: Icon, end }) => (
+          <NavLink
+            key={to}
+            to={to}
+            end={end}
+            className={({ isActive }) =>
+              cn(
+                'flex flex-1 flex-col items-center gap-0.5 py-2 text-[11px] text-muted-foreground',
+                isActive && 'text-amber-400',
+              )
+            }
+          >
+            <Icon className="size-5" />
+            {label}
+          </NavLink>
+        ))}
+      </nav>
     </div>
   )
 }
@@ -86,6 +107,7 @@ const router = createHashRouter([
       { path: '/s/:sid/:index', element: <ExercisePage /> },
       { path: '/dashboard', element: <Dashboard /> },
       { path: '/historique', element: <HistoryPage /> },
+      { path: '/revision', element: <Revision /> },
       { path: '/fiches', element: <Sheets /> },
       { path: '/fiches/:sheet', element: <Sheets /> },
     ],

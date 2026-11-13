@@ -95,7 +95,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl space-y-6 p-6">
+    <div className="mx-auto max-w-7xl space-y-6 p-3 sm:p-6">
       <div className="flex flex-wrap items-end gap-3">
         <div>
           <h1 className="text-xl font-semibold">Dashboard</h1>
@@ -103,7 +103,7 @@ export default function Dashboard() {
             {tried}/{ALL_EXERCISES.length} exercices tentés · {formatDuration(totalTime)} d’entraînement · « maîtrisé » = dernière note ≥ 80
           </p>
         </div>
-        <div className="ml-auto flex gap-2">
+        <div className="flex flex-wrap gap-2 sm:ml-auto">
           <Button size="sm" variant="outline" disabled={!weakIds.length} onClick={() => makeGroup(weakIds, 'Non maîtrisés')}>
             <FolderPlus className="size-3.5" /> Grouper les non maîtrisés ({weakIds.length})
           </Button>
@@ -137,7 +137,7 @@ export default function Dashboard() {
       </div>
 
       <div className="overflow-hidden rounded-xl border border-border">
-        <Table>
+        <Table className="[&_td]:px-1.5 [&_th]:px-1.5 sm:[&_td]:px-2 sm:[&_th]:px-2">
           <TableHeader>
             <TableRow className="bg-muted/40">
               <TableHead className="w-8">
@@ -147,12 +147,12 @@ export default function Dashboard() {
                 />
               </TableHead>
               <TableHead>Exercice</TableHead>
-              <TableHead className="text-center">Proba</TableHead>
-              <TableHead className="text-center">Tentatives</TableHead>
-              <TableHead className="text-center">Temps</TableHead>
-              <TableHead className="text-center">Dernière note</TableHead>
+              <TableHead className="hidden text-center sm:table-cell">Proba</TableHead>
+              <TableHead className="hidden text-center sm:table-cell">Tentatives</TableHead>
+              <TableHead className="hidden text-center sm:table-cell">Temps</TableHead>
+              <TableHead className="text-center"><span className="sm:hidden">Note</span><span className="hidden sm:inline">Dernière note</span></TableHead>
               <TableHead className="text-center">État</TableHead>
-              <TableHead />
+              <TableHead className="hidden sm:table-cell" />
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -162,12 +162,12 @@ export default function Dashboard() {
                 <TableRow key={e.id} data-state={sel.has(e.id) ? 'selected' : undefined}>
                   <TableCell><Checkbox checked={sel.has(e.id)} onCheckedChange={() => toggle(e.id)} /></TableCell>
                   <TableCell>
-                    <div className="font-medium">{e.title}</div>
-                    <div className="text-xs text-muted-foreground">P{e.problem} · {e.kind === 'code' ? 'Code' : 'Maths'}{e.source ? ` · ${e.source}` : ''}</div>
+                    <div className="font-medium whitespace-normal">{e.title}</div>
+                    <div className="text-xs whitespace-normal text-muted-foreground">P{e.problem} · {e.kind === 'code' ? 'Code' : 'Maths'}{e.source ? ` · ${e.source}` : ''}</div>
                   </TableCell>
-                  <TableCell className="text-center"><Stars n={e.stars} /></TableCell>
-                  <TableCell className="text-center tabular-nums">{st.attempts}</TableCell>
-                  <TableCell className="text-center tabular-nums">{st.timeMs ? formatDuration(st.timeMs) : '—'}</TableCell>
+                  <TableCell className="hidden text-center sm:table-cell"><Stars n={e.stars} /></TableCell>
+                  <TableCell className="hidden text-center tabular-nums sm:table-cell">{st.attempts}</TableCell>
+                  <TableCell className="hidden text-center tabular-nums sm:table-cell">{st.timeMs ? formatDuration(st.timeMs) : '—'}</TableCell>
                   <TableCell className="text-center font-medium tabular-nums">{st.lastScore ?? '—'}</TableCell>
                   <TableCell className="text-center">
                     {st.mastered ? (
@@ -178,7 +178,7 @@ export default function Dashboard() {
                       <Badge variant="outline" className="text-muted-foreground">Jamais fait</Badge>
                     )}
                   </TableCell>
-                  <TableCell className="text-right">
+                  <TableCell className="hidden text-right sm:table-cell">
                     <Button size="xs" variant="ghost" disabled={!st.attempts} onClick={() => setSol(e.id)} title={st.attempts ? '' : 'Fais l’exercice avant'}>
                       Correction
                     </Button>

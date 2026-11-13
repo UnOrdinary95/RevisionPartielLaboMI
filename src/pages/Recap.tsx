@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, Navigate, useNavigate, useParams } from 'react-router'
-import { FolderPlus, RotateCcw } from 'lucide-react'
+import { FileText, FolderPlus, KeyRound, RotateCcw } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -22,7 +22,7 @@ export default function Recap() {
   const failed = session.exerciseIds.filter((id) => (lastScore(session.items[id]) ?? 0) < 80)
 
   return (
-    <div className="mx-auto max-w-6xl space-y-5 p-6">
+    <div className="mx-auto max-w-6xl space-y-5 p-3 sm:p-6">
       <div className="flex flex-wrap items-end gap-3">
         <div>
           <Link to="/" className="text-sm text-muted-foreground hover:text-foreground">← Accueil</Link>
@@ -61,12 +61,12 @@ export default function Recap() {
       </div>
 
       <div className="overflow-hidden rounded-xl border border-border">
-        <Table>
+        <Table className="[&_td]:px-1.5 [&_th]:px-1.5 sm:[&_td]:px-2 sm:[&_th]:px-2">
           <TableHeader>
             <TableRow className="bg-muted/40">
-              <TableHead className="w-10">#</TableHead>
+              <TableHead className="hidden w-10 sm:table-cell">#</TableHead>
               <TableHead>Exercice</TableHead>
-              <TableHead className="text-center">Réponses</TableHead>
+              <TableHead className="hidden text-center sm:table-cell">Réponses</TableHead>
               <TableHead className="text-center">Durée</TableHead>
               <TableHead className="text-center">État</TableHead>
               <TableHead className="text-center">Note</TableHead>
@@ -81,17 +81,17 @@ export default function Recap() {
               const sc = lastScore(item)
               return (
                 <TableRow key={id}>
-                  <TableCell className="text-muted-foreground tabular-nums">{i + 1}</TableCell>
+                  <TableCell className="hidden text-muted-foreground tabular-nums sm:table-cell">{i + 1}</TableCell>
                   <TableCell>
                     <button className="text-left hover:underline" onClick={() => nav(`/s/${sid}/${i}`)}>
-                      <div className="font-medium">{ex.title}</div>
+                      <div className="font-medium whitespace-normal">{ex.title}</div>
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
                         <Badge variant="outline" className="h-4 px-1 text-[10px]">{ex.kind === 'code' ? 'Code' : 'Maths'}</Badge>
                         P{ex.problem} <Stars n={ex.stars} />
                       </div>
                     </button>
                   </TableCell>
-                  <TableCell className="text-center tabular-nums">{item?.attempts.length ?? 0}</TableCell>
+                  <TableCell className="hidden text-center tabular-nums sm:table-cell">{item?.attempts.length ?? 0}</TableCell>
                   <TableCell className="text-center tabular-nums">{formatDuration(item?.timeMs ?? 0)}</TableCell>
                   <TableCell>
                     <div className="flex justify-center" title={STATUS_LABEL[st]}>
@@ -101,8 +101,8 @@ export default function Recap() {
                   <TableCell className="text-center font-medium tabular-nums">{sc ?? '—'}</TableCell>
                   <TableCell>
                     <div className="flex justify-end gap-1.5">
-                      <Button size="xs" className="bg-indigo-600 text-white hover:bg-indigo-500" onClick={() => setAnswers(id)}>Mes réponses</Button>
-                      <Button size="xs" variant="outline" onClick={() => setSolution(id)}>Correction</Button>
+                      <Button size="xs" className="bg-indigo-600 text-white hover:bg-indigo-500" title="Mes réponses" aria-label="Mes réponses" onClick={() => setAnswers(id)}><FileText className="sm:hidden" /><span className="hidden sm:inline">Mes réponses</span></Button>
+                      <Button size="xs" variant="outline" title="Correction" aria-label="Correction" onClick={() => setSolution(id)}><KeyRound className="sm:hidden" /><span className="hidden sm:inline">Correction</span></Button>
                     </div>
                   </TableCell>
                 </TableRow>

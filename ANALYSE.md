@@ -2,7 +2,7 @@
 
 Programme : **Pb1** Mandelbrot (complexes), **Pb2** Polynômes, **Pb3** Représentation des nombres, calcul de $e$, $\pi$ et $\sqrt{a}$ (floats, classe `Rat`, séries, Newton).
 
-Fiches associées : [[P1-Mandelbrot-complexes]] · [[P2-Polynomes]] · [[P3-e-pi-racines]]
+Fiches associées : [[P1-Mandelbrot-complexes]] · [[P2-Polynomes]] · [[P3-floats-rationnels-e]]
 
 ---
 

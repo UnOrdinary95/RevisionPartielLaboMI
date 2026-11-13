@@ -2,7 +2,13 @@
 
 Plateforme d'entraînement pour le partiel de Labo Math-Info (Mandelbrot, Polynômes, calcul de e/π/√) : exercices de code Python testés directement dans le navigateur, questions de maths en auto-évaluation, partiels blancs chronométrés et fiches de révision.
 
-## Prérequis
+## En ligne (rien à installer)
+
+**https://unordinary95.github.io/RevisionPartielLaboMI/**
+
+Marche sur ordinateur et sur téléphone. L'onglet **Révision** affiche toutes les corrections, à relire vite. Le site est republié automatiquement à chaque push.
+
+## Prérequis (pour l'installer en local)
 
 - [Node.js](https://nodejs.org) 20 ou plus
 - [pnpm](https://pnpm.io) : `npm install -g pnpm`

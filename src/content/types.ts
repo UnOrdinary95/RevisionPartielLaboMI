@@ -39,5 +39,5 @@ export type Exercise = {
 export const PROBLEMS: Record<Problem, { title: string; short: string }> = {
   1: { title: 'Ensemble de Mandelbrot', short: 'Complexes' },
   2: { title: 'Polynômes', short: 'Polynômes' },
-  3: { title: 'Calcul de e, de π et des racines carrées', short: 'Floats, Rat, e, π, √' },
+  3: { title: 'Calcul de e, de π et des racines carrées', short: 'Floats, Rat, e' },
 }

@@ -7,8 +7,7 @@
 $P(X) = \sum_{k=0}^{d} a_k X^k$ est représenté par la liste `[a0, a1, ..., ad]`, **du degré 0 au degré max**.
 → $5X^3 - 2X^2 + 1$ donne `[1, 0, -2, 5]`. Le polynôme nul est `[]`.
 
-**Pas de 0 final** : `[2, 5, 0]` et `[2, 5]` représentent le même polynôme.
-→ Garder ce 0 rend le degré faux (`len - 1`) et casse `==` (on compare des listes).
+**Pas de 0 final** : le constructeur retire les 0 de fin (`[2, 5, 0]` devient `[2, 5]`).
 
 **Degré** : indice du dernier coefficient non nul. Par convention, $\deg 0 = -1$.
 
@@ -49,8 +48,6 @@ $P(X) = \sum_{k=0}^{d} a_k X^k$ est représenté par la liste `[a0, a1, ..., ad]
 **Horner à la main** : $P = 1 + 2X + 3X^2$, avec $x = 2$
 $3 \;\to\; 2 + 3\cdot2 = 8 \;\to\; 1 + 8\cdot2 = 17$. Donc $P(2) = 17$.
 → On part du coefficient de **plus haut degré** et on répète « × x, + coefficient suivant ».
-
-**$P_n(3)$ est plus que linéaire** : les entiers deviennent énormes (des milliers de chiffres), donc chaque opération coûte de plus en plus cher. Avec $x = 1$, ce n'est pas le cas.
 
 ---
 
@@ -111,50 +108,13 @@ def compose(self, other):                  # Horner sur des polynômes
     return r
 ```
 
-**`__str__`** (format `-2X-X^2+X^3`, du plus petit au plus grand degré) :
-```python
-def __str__(self):
-    if not self.coeff:
-        return "0"
-    s = ""
-    for k, a in enumerate(self.coeff):
-        if a == 0:
-            continue
-        signe = "-" if a < 0 else ("+" if s else "")
-        v = abs(a)
-        if k == 0:
-            s += signe + str(v)
-        else:
-            s += signe + ("" if v == 1 else str(v)) + "X" + ("" if k == 1 else f"^{k}")
-    return s
-```
-
-**`__repr__` contre `__str__`** : `__repr__` sert à l'affichage console et doit pouvoir recréer l'objet (`Poly([1, 2])`). `__str__` sert à `print` et donne la forme lisible `1+2X`.
-
-**Constantes** : avec `if isinstance(other, (int, float)): other = Poly([other])` au début de `__add__` / `__mul__`, puis `__radd__ = __add__` et `__rmul__ = __mul__`, les écritures `2 * P` et `1 + P` fonctionnent.
-
-**À partir des racines** : $\prod (X - r_i)$
-```python
-def depuis_racines(rs):
-    P = Poly([1])
-    for r in rs:
-        P = P * Poly([-r, 1])
-    return P
-```
+**`__repr__`** : c'est l'affichage console, au format exact des doctests (`Poly([1, 2])`).
 
 ---
 
 ## Racines
 
-**TVI** : si $f$ est continue sur $[a,b]$ et que $f(a)f(b) < 0$, alors $f$ s'annule sur $]a,b[$.
-→ Un polynôme est continu partout.
-
-**Borne des racines** : avec $s = |a_0| + \dots + |a_{d-1}|$, toute racine vérifie $|r| \le \max\!\left(\frac{s}{|a_d|}, 1\right)$.
-→ Idée de preuve : si $|r| > 1$, alors $|a_d||r|^d \le \sum_{k<d} |a_k||r|^k \le s|r|^{d-1}$, donc $|r| \le s/|a_d|$.
-
-**Entre deux racines consécutives $s < t$ de $A'$** : $A'$ garde un signe constant, donc $A$ est strictement monotone. Il y a **une** racine si $A(s)A(t) < 0$, **aucune** si le produit est $> 0$.
-
-**Dichotomie** : on divise l'intervalle par 2 à chaque étape, ce qui fait $\log_2\frac{b-a}{\varepsilon}$ étapes.
+**Dichotomie** : si $P(a)$ et $P(b)$ sont de signes opposés, une racine est dans $[a, b]$. On coupe en $m = \frac{a+b}2$ et on garde la moitié où le signe change, ce qui fait $\log_2\frac{b-a}{\varepsilon}$ étapes.
 
 ```python
 def dichotomie(P, a, b, eps):
@@ -165,11 +125,4 @@ def dichotomie(P, a, b, eps):
         else:
             a = m
     return (a + b) / 2
-```
-
-```python
-def borne_racines(P):
-    c = P.coeff
-    s = sum(abs(a) for a in c[:-1])
-    return max(s / abs(c[-1]), 1)
 ```

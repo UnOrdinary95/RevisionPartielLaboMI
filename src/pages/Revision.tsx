@@ -5,9 +5,11 @@ import { Markdown } from '@/components/Markdown'
 import { Stars } from '@/components/StatusIcon'
 import { ALL_EXERCISES } from '@/content'
 import { PROBLEMS, type Exercise, type Problem } from '@/content/types'
+import { computeStats, isWeak, useProgress } from '@/store/progress'
 import { cn } from '@/lib/utils'
 
 type Kind = 'all' | 'code' | 'math'
+type Status = 'all' | 'weak' | 'never' | 'mastered'
 
 function Seg<T extends string | number>({ value, options, onChange }: { value: T; options: [T, string][]; onChange: (v: T) => void }) {
   return (
@@ -77,18 +79,26 @@ function Card({ ex }: { ex: Exercise }) {
 export default function Revision() {
   const [problem, setProblem] = useState<0 | Problem>(0)
   const [kind, setKind] = useState<Kind>('all')
+  const [status, setStatus] = useState<Status>('all')
+  const [stars, setStars] = useState<0 | 2 | 3>(0)
   const [q, setQ] = useState('')
+  const sessions = useProgress((s) => s.sessions)
+  const stats = useMemo(() => computeStats(sessions), [sessions])
 
   const groups = useMemo(() => {
     const needle = q.trim().toLowerCase()
-    const list = ALL_EXERCISES.filter(
-      (e) =>
-        (!problem || e.problem === problem) &&
-        (kind === 'all' || e.kind === kind) &&
-        (!needle || e.title.toLowerCase().includes(needle) || e.tags.some((t) => t.includes(needle))),
-    ).sort((a, b) => b.stars - a.stars || (a.kind === b.kind ? 0 : a.kind === 'code' ? -1 : 1))
+    const list = ALL_EXERCISES.filter((e) => {
+      const st = stats[e.id]
+      if (problem && e.problem !== problem) return false
+      if (kind !== 'all' && e.kind !== kind) return false
+      if (stars && e.stars !== stars) return false
+      if (status === 'weak' && !isWeak(st)) return false
+      if (status === 'mastered' && !st.mastered) return false
+      if (status === 'never' && st.attempts > 0) return false
+      return !needle || e.title.toLowerCase().includes(needle) || e.tags.some((t) => t.includes(needle))
+    }).sort((a, b) => b.stars - a.stars || (a.kind === b.kind ? 0 : a.kind === 'code' ? -1 : 1))
     return ([1, 2, 3] as Problem[]).map((p) => ({ p, items: list.filter((e) => e.problem === p) })).filter((g) => g.items.length)
-  }, [problem, kind, q])
+  }, [problem, kind, stars, status, q, stats])
 
   return (
     <div className="mx-auto max-w-3xl space-y-5 p-3 sm:p-6">
@@ -100,6 +110,8 @@ export default function Revision() {
       <div className="flex flex-wrap items-center gap-2">
         <Seg value={problem} onChange={setProblem} options={[[0, 'Tous'], [1, 'P1'], [2, 'P2'], [3, 'P3']]} />
         <Seg value={kind} onChange={setKind} options={[['all', 'Tout'], ['code', 'Code'], ['math', 'Maths']]} />
+        <Seg value={stars} onChange={setStars} options={[[0, 'Toutes probas'], [3, '★★★'], [2, '★★']]} />
+        <Seg value={status} onChange={setStatus} options={[['all', 'Tous'], ['weak', 'À retravailler'], ['never', 'Jamais faits'], ['mastered', 'Maîtrisés']]} />
         <label className="flex min-w-40 flex-1 items-center gap-2 rounded-lg border border-border px-2.5 py-1">
           <Search className="size-3.5 text-muted-foreground" />
           <input

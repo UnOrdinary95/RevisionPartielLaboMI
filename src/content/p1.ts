@@ -445,7 +445,7 @@ C'est §dansM§ où l'on renvoie l'indice $k$ au lieu de §False§, et §None§ 
     problem: 1,
     kind: 'code',
     title: 'argument(z) avec atan2',
-    stars: 2,
+    stars: 1,
     source: 'TP Pb1 E',
     tags: ['complexes'],
     statement: md`

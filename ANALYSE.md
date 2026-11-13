@@ -49,6 +49,7 @@ Critères : en **1h**, il faut des **automatismes**. Chaque question doit **avoi
 | P1 | Limite de l'algorithme d'appartenance | N'a pas de sens isolément |
 | P1 | Justifier $M\subset D$ | N'a pas de sens isolément |
 | P1 | Minoration $\lvert z_{n+1}\rvert\ge\lvert z_n\rvert^2-\lvert c\rvert$ | Trop poussé pour 1h |
+| P1 | `argument(z)` avec `atan2` | Ne sert qu'à l'accélération par la cardioïde : question faible isolément |
 | P2 | Pourquoi retirer les 0 finaux | Improbable |
 | P2 | Énoncé du TVI | Improbable |
 | P3 | Tout Newton : `mysqrt`, `nthroot`, Newton générique, récurrences, vitesse, erreur | Tiré par les cheveux sur papier |
@@ -58,8 +59,8 @@ Critères : en **1h**, il faut des **automatismes**. Chaque question doit **avoi
 | P3 | Comparer deux fractions sans division (question de maths) | Improbable |
 | P3 | Taylor-Lagrange pour $e$ | Trop long pour 1h |
 
-**Ce qui reste en jeu** (54 exercices) :
-- **P1** : les classes `Complexe`, `suite`, `dansM`, `rang_echap`, `argument`/`cardioïde`, les termes à la main, les calculs sur les complexes, le coût de `dansM`, les récurrences (disque, conjugué), les symétries.
+**Ce qui reste en jeu** (53 exercices) :
+- **P1** : les classes `Complexe`, `suite`, `dansM`, `rang_echap`, `dans_cardioide`, les termes à la main, les calculs sur les complexes, le coût de `dansM`, les récurrences (disque, conjugué), les symétries.
 - **P2** : toute la classe `Poly`, Horner (code, à la main, coût), `derive`, `compose`, la dichotomie, les degrés de la somme, du produit et de la composée.
 - **P3** : $\sum\frac1{k!}$, `rang_approx_e`, `approx_e`, la classe `Rat` (opérations, comparaisons), `pgcd`, `ceilsqrt`, la somme $\frac1{k^4}$ en ordre inverse, les fractions irréductibles et les floats (0.2 contre 0.25).
 
